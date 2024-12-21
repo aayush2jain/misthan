@@ -44,8 +44,8 @@ export default function HomePage() {
         }}
         className="z-50 flex flex-col justify-center items-center"
       >
-        <motion.p className="font-bold text-xl text-pretty text-white  md:text-6xl text-center py-4">
-          Eat Pure,Eat Deshi<br /> Eat Misthan
+        <motion.p className="font-papaya text-3xl text-pretty text-white/90  md:text-6xl text-center py-4">
+          Eat Pure,Eat Desi<br /> Eat Misthan
         </motion.p>
         <button className="px-4 py-2 backdrop-blur-sm border bg-emerald-300/10 border-emerald-500/20 text-white mx-auto text-center rounded-full relative mt-4">
           <span>Order now →</span>
@@ -54,49 +54,65 @@ export default function HomePage() {
       </motion.div>
     </ImagesSlider>
    <div id="about-us" className="text-center py-16 rounded-lg shadow-lg px-[4vw]">
-  <h1 className="text-[12vh] font-extrabold text-gray-800 leading-tight">
-    Why Choose <span className="italic">MISTHAN</span>?
+  <h1 className="text-[8vh] md:text-[12vh] font-extrabold text-gray-800 leading-tight">
+    Why Choose <span className=" font-papaya">MISTHAN</span>?
   </h1>
   <p className="text-2xl mt-6 text-black font-medium">
-    Have you ever craved the true taste of <span className="italic">Desi</span> delights? 🌾
+    Have you ever craved the true taste of <span className="italic font-cute">Desi</span> delights? 🌾
   </p>
   <p className="text-3xl mt-4 text-black">
-    Remember those <span className="font-semibold">Desi ghee ladoos</span> and <span className="font-semibold">gajar ka halwa</span> that your grandma used to make? 🥰
+    Remember those <span className="font-cute text-[5vh]">Desi Ghee ladoos</span> and <span className="font-cute">Gajar ka halwa</span> that your grandma used to make? 🥰
   </p>
   <p className="text-2xl mt-6 text-black leading-relaxed">
-    At <span className="font-bold ">MISTHAN</span>, we bring you the finest, traditional sweets and snacks, <span className="text-black font-bold">chemical-free</span> and delivered straight from the <span className="font-semibold">OG halwaii of the villages</span> to your doorstep. 🚚
+    At <span className="font-papaya ">MISTHAN</span>, we bring you the finest, traditional sweets and snacks, <span className="text-black font-bold">chemical-free</span> and delivered straight from the <span className="font-semibold">OG halwaii of the villages</span> to your doorstep. 🚚
   </p>
   <p className="text-xl mt-6 text-black italic">
     Rediscover the taste of nostalgia and purity in every bite! 🌟
   </p>
 </div>
-  <div>
+  <div className="relative">
+   
+    <div >
     <ZoomParallax></ZoomParallax>
+    </div>
+     <div className="absolute text-[6vh] md:text-[10vh] text-black z-50 bottom-[10vh] font-cute">
+      <h1 className="ml-[10vw] ">"Now Taste the Sweetness of your favourite Sweet </h1>
+      <h1 className="ml-[50vw]"> or</h1>
+      <h1 className="ml-[50vw]">saltiness of your favourite snack"</h1>
+       <h1 className="ml-[20vw] md:ml-[40vw]"> without any chemical<br></br> at your home</h1>
+    </div>
   </div>
   <div id="explore">
-  <h1 className="pl-[10vw] text-[10vh] text-black font-bold">Our Services-</h1>
-  <div className="flex-row flex justify-around pb-[10vh]">
-    <div className="h-[40vh] w-[20vw] bg-slate-400">
-      <img className="h-[34vh] w-[20vw]" src="images/image5.jpg"></img>
-      <h1 className="text-center text-2xl font-semibold">Sweet</h1>
+  <h1 className="pl-[5vw] py-[5vh] text-[10vh] text-black font-papaya">Our Services-</h1>
+  <div className="flex-col md:flex-row flex items-center md:justify-around py-[10vh] text-white">
+    <div className="h-[40vh]  mb-[10vh] md:my-0 relative rounded-3xl w-[80vw]  md:w-[20vw] bg-slate-400 ">
+      <img className="h-[40vh] w-[80vw] md:w-[25vw] rounded-3xl " src="images/image5.jpg"></img>
+      <h1 className="text-center absolute bottom-[5vh] left-[7vw] z-50 text-5xl font-cute">Sweet</h1>
     </div>
-    <div className="h-[40vh] w-[20vw] bg-slate-400">
-      <img className="h-[34vh] w-[20vw]" src="images/namkeen.jpg"></img>
-            <h1 className="text-center text-2xl font-semibold">Namkeen</h1>
+
+     <div className="h-[40vh]  mb-[10vh] md:my-0  w-[80vw]  md:w-[20vw] relative rounded-3xl bg-slate-400 md:animate-bounce">
+      <img className="h-[40vh]  w-[80vw]  md:w-[20vw] bg-cover rounded-3xl" src="images/image4.jpg"></img>
+            <h1 className="text-center  absolute bottom-[5vh] left-[7vw] z-50 text-5xl font-cute">Combo</h1>
 
     </div>
-    <div className="h-[40vh] w-[20vw] bg-slate-400">
-      <img className="h-[34vh] w-[20vw]" src="images/image4.jpg"></img>
-            <h1 className="text-center text-2xl font-semibold">Combo</h1>
+
+    <div className="h-[40vh]  w-[80vw]  md:w-[20vw] font-extrabold relative rounded-3xl bg-slate-400">
+      <img className="h-[40vh]  w-[80vw]  md:w-[20vw] rounded-3xl" src="images/namkeen.jpg"></img>
+            <h1 className="text-center  absolute bottom-[5vh] left-[6vw] z-50 text-5xl  font-cute">Namkeen</h1>
 
     </div>
-  </div>                     
+   
+  </div>
+  <div className="md:h-[6vh] w-[50vw] bg-white/80 hover:bg-slate-200/90 hover:cursor-pointer shadow-xl border-2 border-solid border-gray-500/70 text-center rounded-full md:w-[10vw] mx-auto">
+    <h1 className="py-[1vh] rounded-full font-semibold" >Explore More...</h1>
+    </div>                     
   </div>
   <div id="review">
-  <AnimatedTestimonialsDemo></AnimatedTestimonialsDemo>
+  <h1 className="text-[10vh] ml-[5vw] mt-[10vh] font-papaya ">Our Testinomials</h1>
+  <AnimatedTestimonialsDemo ></AnimatedTestimonialsDemo>
   </div>
   <div id="contact">
-
+  <h1 className="text-[10vh] ml-[5vw] mt-[10vh] font-papaya ">Contact Us</h1>
   </div>
     </div>
   );

@@ -8,6 +8,11 @@ export default {
   ],
   theme: {
   	extend: {
+		fontFamily:{
+           title:["Playwrite TZ Guides","serif"],
+		   cute:["Cookie", "serif"],
+		   papaya:["Pattaya", "serif"]
+		},
   		colors: {
   			background: 'hsl(var(--background))',
   			foreground: 'hsl(var(--foreground))',
