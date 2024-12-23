@@ -1,6 +1,7 @@
 'use client';
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import Script from "next/script";
 import { useSearchParams } from "next/navigation";
 const ProductForm = () => {
     const params = useSearchParams();
@@ -22,6 +23,70 @@ const ProductForm = () => {
       [name]: value,
     }));
   };
+  const paymentHandler = async (e) => {
+  e.preventDefault(); // Prevent the default form submission behavior
+  
+  const currency = "INR";
+
+
+    // Step 1: Create an order in your backend
+    const response = await axios.post("http://localhost:4000/payment/", {
+      amount: productPrice * 100, // Convert to subunits
+      receipt: productId,
+      currency,
+    });
+
+    const { id: orderId, amount } = response.data; // Extract order ID and amount from backend response
+   
+    // Step 2: Configure Razorpay options
+    const options = {
+      key: "rzp_test_0KBfIDCc8HKw34", // Replace with your Razorpay Key ID
+      amount,
+      currency,
+      name: "MISTHAN", // Your business name
+      description: "Test Transaction",
+      image: "https://example.com/your_logo", // Replace with your logo URL
+      order_id: orderId, // Order ID generated in Step 1
+      handler: async function (response) {
+        // Step 3: Verify the payment in your backend
+        const verificationResponse = await axios.post(
+          "http://localhost:4000/payment/verification",
+          {
+            paymentResponse: response, // Pass the entire Razorpay response
+          }
+        );
+
+        if (verificationResponse.data.msg === "success") {
+          alert("Payment Successful");
+        } else {
+          alert("Payment Verification Failed");
+        }
+      },
+      prefill: {
+        name: "Web Dev Matrix", // Customer's name
+        email: "webdevmatrix@example.com", // Customer's email
+        contact: "9000000000", // Customer's phone number
+      },
+      notes: {
+        address: "Razorpay Corporate Office",
+      },
+      theme: {
+        color: "#3399cc",
+      },
+    };
+
+    // Step 4: Open Razorpay payment gateway
+    const rzp1 = new window.Razorpay(options);
+
+    // Handle payment failures
+    rzp1.on("payment.failed", function (response) {
+      alert("Payment Failed");
+      console.error("Payment Failed:", response.error);
+    });
+
+    rzp1.open();
+ 
+};
 
   // Handle form submission
   const handleSubmit = async (e) => {
@@ -47,7 +112,7 @@ const ProductForm = () => {
   return (
     <div className="max-w-md mx-auto p-4 bg-gray-100 rounded shadow">
       <h2 className="text-xl font-bold mb-4">Product Form</h2>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={paymentHandler}>
         <div className="mb-4">
           <label className="block text-gray-700 font-medium mb-2" htmlFor="username">
             name
@@ -99,6 +164,10 @@ const ProductForm = () => {
           Submit
         </button>
       </form>
+       <Script
+        src="https://checkout.razorpay.com/v1/checkout.js"
+        strategy="afterInteractive" // Ensures the script loads after the page is interactive
+      />
     </div>
   );
 };
