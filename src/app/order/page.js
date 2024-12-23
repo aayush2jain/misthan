@@ -1,20 +1,24 @@
 'use client';
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import axios from "axios";
 import Script from "next/script";
 import { useSearchParams } from "next/navigation";
+
 const ProductForm = () => {
-    const params = useSearchParams();
-    const  productId  = params.get("id");
-    const productName = params.get("name");
-    const productPrice = params.get("price");
-    const userId = params.get("userId");
+  const params = useSearchParams();
+  const productId = params.get("id");
+  const productName = params.get("name");
+  const productPrice = params.get("price");
+  const userId = params.get("userId");
+
   const [formData, setFormData] = useState({
     username: "",
     contact: "",
     address: "",
   });
-  console.log("check",productName,productPrice);
+
+  console.log("check", productName, productPrice);
+
   // Handle form input changes
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -23,11 +27,34 @@ const ProductForm = () => {
       [name]: value,
     }));
   };
-  const paymentHandler = async (e) => {
-  e.preventDefault(); // Prevent the default form submission behavior
-  
-  const currency = "INR";
 
+  // Handle form submission
+  const handleSubmit = async () => {
+    const submissionData = {
+      ...formData,
+      productId: productId,
+      productName: productName,
+      productPrice: productPrice,
+      userId: userId,
+    };
+
+    try {
+      const response = await axios.post(
+        "http://localhost:4000/user/order",
+        submissionData
+      ); // Replace with your API endpoint
+      console.log("Form submitted successfully:", response.data);
+      alert("Form submitted successfully!");
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      alert("Error submitting form. Please try again.");
+    }
+  };
+
+  const paymentHandler = async (e) => {
+    e.preventDefault(); // Prevent the default form submission behavior
+
+    const currency = "INR";
 
     // Step 1: Create an order in your backend
     const response = await axios.post("http://localhost:4000/payment/", {
@@ -37,7 +64,7 @@ const ProductForm = () => {
     });
 
     const { id: orderId, amount } = response.data; // Extract order ID and amount from backend response
-   
+
     // Step 2: Configure Razorpay options
     const options = {
       key: "rzp_test_0KBfIDCc8HKw34", // Replace with your Razorpay Key ID
@@ -58,17 +85,21 @@ const ProductForm = () => {
 
         if (verificationResponse.data.msg === "success") {
           alert("Payment Successful");
+          await handleSubmit(); // Call handleSubmit after successful payment
+          setTimeout(() => {
+            window.location.href = "/";
+          }, 3000);
         } else {
           alert("Payment Verification Failed");
         }
       },
       prefill: {
-        name: "Web Dev Matrix", // Customer's name
-        email: "webdevmatrix@example.com", // Customer's email
-        contact: "9000000000", // Customer's phone number
+        name: formData.username, // Use entered username
+        email: "webdevmatrix@example.com", // Default email
+        contact: formData.contact, // Use entered contact
       },
       notes: {
-        address: "Razorpay Corporate Office",
+        address: formData.address, // Use entered address
       },
       theme: {
         color: "#3399cc",
@@ -85,28 +116,6 @@ const ProductForm = () => {
     });
 
     rzp1.open();
- 
-};
-
-  // Handle form submission
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const submissionData = {
-      ...formData,
-      productId: productId,
-      productName: productName,
-      productPrice: productPrice,
-      userId: userId,
-    };
-
-    try {
-      const response = await axios.post("http://localhost:4000/user/order", submissionData); // Replace with your API endpoint
-      console.log("Form submitted successfully:", response.data);
-      alert("Form submitted successfully!");
-    } catch (error) {
-      console.error("Error submitting form:", error);
-      alert("Error submitting form. Please try again.");
-    }
   };
 
   return (
@@ -115,7 +124,7 @@ const ProductForm = () => {
       <form onSubmit={paymentHandler}>
         <div className="mb-4">
           <label className="block text-gray-700 font-medium mb-2" htmlFor="username">
-            name
+            Name
           </label>
           <input
             type="text"
@@ -164,7 +173,7 @@ const ProductForm = () => {
           Submit
         </button>
       </form>
-       <Script
+      <Script
         src="https://checkout.razorpay.com/v1/checkout.js"
         strategy="afterInteractive" // Ensures the script loads after the page is interactive
       />
