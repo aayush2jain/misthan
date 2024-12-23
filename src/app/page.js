@@ -24,8 +24,11 @@ export default function HomePage() {
 
         requestAnimationFrame(raf)
     },[])
+    const google = () => {
+  window.open(`http://localhost:4000/auth/google`, "_self");
+  };
   return (
-    <div className=" bg-gradient-to-b from-orange-100 to-orange-200 ">
+    <div className="bg-yellow-100">
     <div className="flex justify-center mb-[15vh] ">
       <img className="absolute mx-auto z-[100] h-[30vh]" src={logo}></img>
     </div>
@@ -103,7 +106,7 @@ export default function HomePage() {
     </div>
    
   </div>
-  <div className="md:h-[6vh] w-[50vw] bg-white/80 hover:bg-slate-200/90 hover:cursor-pointer shadow-xl border-2 border-solid border-gray-500/70 text-center rounded-full md:w-[10vw] mx-auto">
+  <div onClick={google} className="md:h-[6vh] w-[50vw] bg-white/80 hover:bg-slate-200/90 hover:cursor-pointer shadow-xl border-2 border-solid border-gray-500/70 text-center rounded-full md:w-[10vw] mx-auto">
     <h1 className="py-[1vh] rounded-full font-semibold" >Explore More...</h1>
     </div>                     
   </div>
