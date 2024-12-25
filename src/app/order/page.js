@@ -1,5 +1,5 @@
 'use client';
-import React, { useState } from "react";
+import React, { Suspense, useState } from "react";
 import axios from "axios";
 import Script from "next/script";
 import { useSearchParams } from "next/navigation";
@@ -120,6 +120,7 @@ const ProductForm = () => {
   };
 
   return (
+    <Suspense fallback={<div>Loading...</div>}>
     <div className="">
     <div className="max-w-md mt-[20vh] mx-auto p-4 bg-gray-100 rounded shadow">
       <h2 className="text-xl font-bold mb-4">Contact Details:</h2>
@@ -184,6 +185,7 @@ const ProductForm = () => {
       />
     </div>
     </div>
+    </Suspense>
   );
 };
 
