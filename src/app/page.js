@@ -1,11 +1,12 @@
 "use client";
 import { motion } from "framer-motion";
-import React from "react";
+import React, { Suspense } from "react";
 import { ImagesSlider } from "../components/ui/images-slider";
 import ZoomParallax from '../components/ZoomParallex/index.js'
 import { AnimatedTestimonialsDemo } from "./try/page";
 import { useEffect } from 'react';
 import Lenis from '@studio-freight/lenis'
+
 export default function HomePage() {
   const logo = "logo.png";
   const images = [
@@ -36,6 +37,7 @@ export default function HomePage() {
       }
   };
   return (
+    <Suspense fallback={<div>Loading...</div>}>
     <div className="bg-gray-50">
     <div className="flex justify-center mb-[15vh] ">
       <img className="absolute mx-auto z-[100] h-[30vh]" src={logo}></img>
@@ -127,6 +129,7 @@ export default function HomePage() {
   <h1 className="text-[10vh] ml-[5vw] mt-[10vh] font-papaya ">Contact Us</h1>
   </div>
     </div>
+    </Suspense>
   );
     
 }
