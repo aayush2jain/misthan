@@ -189,4 +189,10 @@ const ProductForm = () => {
   );
 };
 
-export default ProductForm;
+const Page = () => {
+  return (
+    <Suspense fallback={<div></div>}>
+      <ProductForm />
+    </Suspense>
+  )}
+export default Page;
