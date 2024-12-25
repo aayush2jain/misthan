@@ -10,8 +10,12 @@ import Link from 'next/link';
 import axios from 'axios';
 const page = () => {
   const [productDetails, setproductDetails] = useState("");
+  const [productName, setproductName] = useState("");
+  const [similarProducts, setsimilarProducts] = useState([]);
+  const [userId, setuserId] = useState('');
   const params = useSearchParams();
   console.log("hello",params.get("userId"));
+ 
   const order = async ()=>{
     <Link href={{pathname:'/order',query:{
       id:productDetails._id,
@@ -24,20 +28,39 @@ const page = () => {
   const response = async ()=>{
     try {
       console.log("hello");
+      setuserId(params.get("userId"));
       const url = `http://localhost:4000/user/getproduct/${params.get("id")}`;
       const response = await axios.get(url, { withCredentials: true });
-      console.log("check",response.data.product);
+      console.log("check",response.data.product.name);
       setproductDetails(response.data.product);
+      setproductName(response.data.product.name);
+      similarProduct(response.data.product.name);
     } catch (err) {
       console.log(err);
     }
 
   }
+
+  const similarProduct = async(name)=>{
+    try {
+      console.log("helloproduct",productName);
+      const url = `http://localhost:4000/user/similarproduct/${name}`;
+      const response = await axios.get(url, { withCredentials: true });
+      console.log("check",response.data);
+      console.log("check2",response.data.products);
+      setsimilarProducts(response.data.products);
+    } 
+    catch (err) {
+      console.log(err);
+    }
+  }
+
+
   useEffect(() => {
     response();
   }, []);
   return (
-     <div>
+     <div className='bg-gray-50'>
          <div id="nav" className='w-full flex items-center  bg-pink-100'>
          <div className='py-[1vh] pl-[2vw]'>
            <img  src="images/misthan.png"></img>
@@ -53,39 +76,59 @@ const page = () => {
            <FaUserCircle className='text-[6vh]'></FaUserCircle>
          </div>
          </div>
-         <div className='mt-[10vh] ml-8 flex flex-wrap gap-8'>
-          <div className='ml-[6vw] w-[40vw] h-[70vh] bg-pink-100 rounded-3xl'>
-          <img className='w-[40vw] h-[70vh] rounded-3xl' src={productDetails.image}></img>
+         <div className='p-4 md:p-8 mt-[5vh] rounded-3xl w-[90vw] md:w-[69vw] bg-white shadow-2xl mx-auto flex flex-col md:flex-row  gap-8'>
+          <div className='h-[30vh] md:h-[65vh] bg-pink-100 rounded-3xl'>
+          <img className='w-[95vw] md:w-[35vw] h-[30vh] md:h-[65vh] rounded-3xl' src={productDetails.image}></img>
           </div>
-          <div id="" className='ml-[6vw] w-[40vw] h-[70vh] text-black rounded-3xl'>
-            <div id="discription" className=' font-papaya '>
-            <h1 className='text-[6vh]'>Description:</h1>
+          <div id="" className='ml-[1vw] pt-[1vh]  h-[65vh] text-black rounded-3xl'>
+            <div id="discription" className='font-bold'>
+            <h1 className='text-xl'>{productDetails.name}</h1>
             <p className='font-normal'>{productDetails.description}</p>
             </div>
-            <div id="quantity" className='mt-[5vh]'>
-            <h1 className='text-3xl  font-papaya '>Quantity:</h1>
-            <h1 className='text-3xl font-semibold'>{productDetails.amount}g</h1>
+            <div id="quantity" className='mt-[3vh]'>
+            <h1 className='text-xl '>Quantity:</h1>
+            <h1 className='text-xl font-bold'>{productDetails.amount}g</h1>
             </div>
-            <div id="order" className='flex items-center gap-10 text-3xl font-semibold mt-[5vh]'>
-            <h1 >{productDetails.price}$</h1>
-             <Link href={{pathname:'/order',query:{
+            <div className='flex  items-center mt-[3vh] gap-[6vw] md:gap-[2vw]'>
+            <div id="price" className=''>
+            <h1 className='text-xl'>Price:<span className='font-bold'>{productDetails.price}$</span></h1>
+            {/* <h1 className='text-xl font-bold' ></h1> */}
+            </div>
+            <Link href={{pathname:'/order',query:{
               id:productDetails._id,
               userId:params.get("userId"),
               name:productDetails.name,
               price:productDetails.price,
               quantity:productDetails.amount
-    }}}>
-            <div id="button" onClick={order} className='bg-gray-400 text-xl font-semibold text-black p-2 rounded-3xl'>
+             }}}>
+            <div id="button" onClick={order} className='bg-gray-200 hover:bg-gray-300 border-[1px] border-solid border-gray-400 shadow-sm w-[40vw]  md:w-[9vw] text-base text-center  text-black py-[4px] rounded-3xl'>
               <h1>Order Now</h1>
             </div>
             </Link>
             </div>
-            <div id="similar product">
-              <h1>similar products</h1>
+           
+            <div id="similar product" className='mt-[3vh]'>
+              <h1 className='text-xl font-semibold'>similar products:</h1>
+               {
+              similarProducts
+              .filter(product => product.amount != productDetails.amount) // Filter out products with the same quantity
+               .map((product) => (
+                <Link href={{ pathname: '/product', query: { id: product._id,userId:userId } }}>
+      <div key={product._id}  onClick={()=>{setproductDetails(product)}}  className='bg-gray-200 mt-[2vh] flex w-[80vw] md:w-[14vw] rounded-xl h-[8vh]'>
+        <img className='h-[8vh] md:w-[9vh] rounded-l-xl' src={product.image}></img>
+        <div className='text-center ml-[2vw]'>
+          <h1>{product.name}</h1>
+          <h1>{product.price}</h1>
+        </div>
+      </div>
+      </Link>
+    ))
+}
             </div>
+            </div> 
         </div>
          </div>
-    </div>
+
   )
 }
 

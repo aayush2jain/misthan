@@ -10,7 +10,7 @@ const ProductForm = () => {
   const productName = params.get("name");
   const productPrice = params.get("price");
   const userId = params.get("userId");
-
+  const [final, setfinal] = useState(false);
   const [formData, setFormData] = useState({
     username: "",
     contact: "",
@@ -44,7 +44,7 @@ const ProductForm = () => {
         submissionData
       ); // Replace with your API endpoint
       console.log("Form submitted successfully:", response.data);
-      alert("Form submitted successfully!");
+      alert("Order has been comfirmed!");
     } catch (error) {
       console.error("Error submitting form:", error);
       alert("Error submitting form. Please try again.");
@@ -85,7 +85,8 @@ const ProductForm = () => {
 
         if (verificationResponse.data.msg === "success") {
           alert("Payment Successful");
-          await handleSubmit(); // Call handleSubmit after successful payment
+          await handleSubmit();
+          setfinal(true); // Call handleSubmit after successful payment
           setTimeout(() => {
             window.location.href = "/";
           }, 3000);
@@ -119,8 +120,9 @@ const ProductForm = () => {
   };
 
   return (
-    <div className="max-w-md mx-auto p-4 bg-gray-100 rounded shadow">
-      <h2 className="text-xl font-bold mb-4">Product Form</h2>
+    <div className="">
+    <div className="max-w-md mt-[20vh] mx-auto p-4 bg-gray-100 rounded shadow">
+      <h2 className="text-xl font-bold mb-4">Contact Details:</h2>
       <form onSubmit={paymentHandler}>
         <div className="mb-4">
           <label className="block text-gray-700 font-medium mb-2" htmlFor="username">
@@ -166,17 +168,21 @@ const ProductForm = () => {
             required
           />
         </div>
+        
         <button
           type="submit"
           className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
         >
-          Submit
+          Pay {productPrice}₹
         </button>
+       
       </form>
+      {final && <p className="text-green-500 mt-4"> redirecting to home page ...</p>}
       <Script
         src="https://checkout.razorpay.com/v1/checkout.js"
         strategy="afterInteractive" // Ensures the script loads after the page is interactive
       />
+    </div>
     </div>
   );
 };

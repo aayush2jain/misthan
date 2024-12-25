@@ -19,58 +19,65 @@ const CustomizeItem = () => {
   };
 
   return (
-    <div className="w-full max-w-md mx-auto bg-gray-100 p-6 rounded-lg shadow-lg">
-      <div className="text-lg font-semibold mb-4">
-        <h2>Kaju Burfi • ₹316 - ₹1263</h2>
-        <p className="text-gray-600">Customise as per your taste</p>
-      </div>
-      <hr className="my-4" />
-      <div className="text-lg font-medium mb-4">Quantity</div>
-      <div className="space-y-4">
-        {options.map((option, index) => (
-          <div
-            key={index}
-            className="flex justify-between items-center p-3 rounded-lg border cursor-pointer"
-            style={{
-              borderColor:
-                selectedQuantity.label === option.label
-                  ? "orange"
-                  : "gray",
-            }}
-            onClick={() => handleSelection(option)}
-          >
-            <label className="flex items-center space-x-2">
-              <input
-                type="radio"
-                name="quantity"
-                checked={selectedQuantity.label === option.label}
-                onChange={() => handleSelection(option)}
-                className="h-4 w-4 text-orange-500 focus:ring-orange-500"
-              />
-              <span>{option.label}</span>
-            </label>
-            <span>₹{option.price}</span>
-          </div>
-        ))}
-      </div>
-      <div className="mt-6 bg-gray-200 p-4 rounded-lg">
-        <p className="text-gray-600 mb-2">
-          Quantity: [{selectedQuantity.label}]
-        </p>
-        <p className="text-lg font-semibold">₹{selectedQuantity.price}.00</p>
-      </div>
-      <div className="mt-6 flex justify-between items-center">
-        <button
-          className="text-orange-600 hover:underline font-medium"
-          onClick={() => setSelectedQuantity({ label: "", price: 0 })}
-        >
-          Hide Customized Item
-        </button>
-        <button className="px-4 py-2 bg-green-500 text-white rounded-lg font-medium hover:bg-green-600">
-          Add Item to cart
-        </button>
+    <div class="flex flex-col md:flex-row bg-gray-50 p-6 rounded-lg shadow-lg max-w-4xl mx-auto">
+
+  <div class="md:w-1/2 flex justify-center items-center">
+    <img
+      src="your-image-url.jpg"
+      alt="Delicious Barfi"
+      class="rounded-lg shadow-md w-full max-w-md"
+    />
+  </div>
+
+  <div class="md:w-1/2 mt-6 md:mt-0 md:ml-8 flex flex-col justify-center">
+    <h2 class="text-3xl font-bold text-gray-800">Delicious Barfi</h2>
+    <p class="text-lg text-gray-600 mt-4">
+      A perfect treat for your taste buds, made with love and tradition.
+    </p>
+
+    <div class="mt-4">
+      <p class="text-lg font-semibold text-gray-800">Quantity:</p>
+      <p class="text-xl font-bold text-gray-900">250g</p>
+    </div>
+
+    <div class="mt-4">
+      <p class="text-lg font-semibold text-gray-800">Price:</p>
+      <p class="text-xl font-bold text-green-600">$200</p>
+    </div>
+
+  
+    <button
+      class="mt-6 bg-green-500 text-white px-6 py-3 rounded-lg shadow-md hover:bg-green-600 transition"
+    >
+      Order Now
+    </button>
+
+   
+    <div class="mt-8">
+      <h3 class="text-lg font-semibold text-gray-700">Similar Products:</h3>
+      <div class="grid grid-cols-2 gap-4 mt-4">
+       
+        <div class="bg-white p-4 rounded-lg shadow-sm">
+          <img
+            src="similar-product1.jpg"
+            alt="Product 1"
+            class="rounded-md w-full"
+          />
+          <p class="mt-2 text-sm font-semibold text-gray-800">Barfi Special</p>
+        </div>
+        <div class="bg-white p-4 rounded-lg shadow-sm">
+          <img
+            src="similar-product2.jpg"
+            alt="Product 2"
+            class="rounded-md w-full"
+          />
+          <p class="mt-2 text-sm font-semibold text-gray-800">Nutty Delight</p>
+        </div>
       </div>
     </div>
+  </div>
+</div>
+
   );
 };
 
