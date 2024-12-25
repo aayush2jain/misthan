@@ -1,5 +1,5 @@
 "use client"
-import React, { useEffect, useState } from 'react'
+import React, { Suspense, useEffect, useState } from 'react'
 import { BsSearch } from "react-icons/bs";
 import { IoSearchCircle } from "react-icons/io5";
 import { IoCartSharp } from "react-icons/io5";
@@ -8,7 +8,7 @@ import { IoStar } from "react-icons/io5";
 import { useSearchParams } from 'next/navigation';
 import Link from 'next/link';
 import axios from 'axios';
-const page = () => {
+const Productpage = () => {
   const [productDetails, setproductDetails] = useState("");
   const [productName, setproductName] = useState("");
   const [similarProducts, setsimilarProducts] = useState([]);
@@ -131,5 +131,12 @@ const page = () => {
 
   )
 }
+const Page = () => {
+  return(
+    <Suspense fallback={<div>Loading...</div>}>
+    <Productpage/>
+    </Suspense>
+    )
+  }
 
-export default page
+export default Page;
