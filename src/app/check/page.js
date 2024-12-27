@@ -15,7 +15,7 @@ const page = () => {
   const imgproduct = "https://img.freepik.com/free-photo/from-assorted-baked-with-baklava-baklava-sheki-flowers-smoked-fish_176474-2605.jpg?t=st=1734851190~exp=1734854790~hmac=899a502351fb9c78286511bd8d2c809b5bfb75505ffc5fdbe139c1e85af923cb&w=900";
   const getUser = async () => {
 		try {
-			const url = `http://localhost:4000/auth/login/success`;
+			const url = `https://mistbackend.vercel.app/auth/login/success`;
 			const response = await axios.get(url, { withCredentials: true });
 			console.log("checkuser",response.data.user._id);
       console.log("checkuserpic",response.data.user.profilepic);
@@ -35,7 +35,7 @@ const page = () => {
   }
   const getproduct = async () => {
     try {
-      const url = `http://localhost:4000/user/home`;
+      const url = `https://mistbackend.vercel.app/user/home`;
       const response = await axios.get(url, { withCredentials: true });
       console.log("helo",response.data.products);
       setproducts(response.data.products);

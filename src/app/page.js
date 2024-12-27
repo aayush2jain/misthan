@@ -30,7 +30,7 @@ export default function HomePage() {
 
      
       console.log("idhaar tak koi dikkat nahi");
-  window.open(`http://localhost:4000/auth/google`, "_self");
+  window.open(`https://mistbackend.vercel.app/auth/google`, "_self");
       }
       catch(error){
         console.log("error",error);
