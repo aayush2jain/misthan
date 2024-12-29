@@ -25,7 +25,7 @@ const ProductForm = () => {
     // Add your submit logic here (e.g., send to an API)
     try {
         const response = await axios.post(
-            "http://localhost:4000/user/product",
+            "https://mistbackend.vercel.app/user/product",
             { ...formData },
             {
                 headers: {

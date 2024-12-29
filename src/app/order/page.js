@@ -40,7 +40,7 @@ const ProductForm = () => {
 
     try {
       const response = await axios.post(
-        "http://localhost:4000/user/order",
+        "https://mistbackend.vercel.app/user/order",
         submissionData
       ); // Replace with your API endpoint
       console.log("Form submitted successfully:", response.data);
@@ -57,7 +57,7 @@ const ProductForm = () => {
     const currency = "INR";
 
     // Step 1: Create an order in your backend
-    const response = await axios.post("http://localhost:4000/payment/", {
+    const response = await axios.post("https://mistbackend.vercel.app/payment/", {
       amount: productPrice * 100, // Convert to subunits
       receipt: productId,
       currency,
@@ -67,7 +67,7 @@ const ProductForm = () => {
 
     // Step 2: Configure Razorpay options
     const options = {
-      key: "rzp_test_0KBfIDCc8HKw34", // Replace with your Razorpay Key ID
+      key: "rzp_live_JjN6EJ23Qrir9N", // Replace with your Razorpay Key ID
       amount,
       currency,
       name: "MISTHAN", // Your business name
@@ -77,7 +77,7 @@ const ProductForm = () => {
       handler: async function (response) {
         // Step 3: Verify the payment in your backend
         const verificationResponse = await axios.post(
-          "http://localhost:4000/payment/verification",
+          "https://mistbackend.vercel.app/payment/verification",
           {
             paymentResponse: response, // Pass the entire Razorpay response
           }
