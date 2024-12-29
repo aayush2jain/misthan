@@ -72,7 +72,7 @@ const Register = () => {
                         />
                     </div>
                     <div>
-                        <label className="block text-gray-700 font-medium mb-2">Password:</label>
+                        <label className="block text-gray-700 font-medium mb-2">Create Password:</label>
                         <input
                             type="password"
                             value={password}
