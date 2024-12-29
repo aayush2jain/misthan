@@ -187,7 +187,7 @@ export default function HomePage() {
                            placeholder="Enter your subject" required></input>
 
                        <textarea name="message" rows="4"
-                           class="bg-black/50 text-black w-[60vw] sm:w-[30vw] h-[6vh] pl-4 pb-[15vh] pt-[2vh] rounded-lg
+                           class="bg-black/50 text-white w-[60vw] sm:w-[30vw] h-[6vh] pl-4 pb-[15vh] pt-[2vh] rounded-lg
                            my-1 overflow-y-hidden "
                            placeholder="I would appreciate if you have any recommendation for my website" required></textarea>
 

@@ -15,7 +15,7 @@ const Productpage = () => {
   const [userId, setuserId] = useState('');
   const params = useSearchParams();
   console.log("hello",params.get("userId"));
- 
+  
   const order = async ()=>{
     <Link href={{pathname:'/order',query:{
       id:productDetails._id,
