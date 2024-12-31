@@ -68,7 +68,7 @@ export default function HomePage() {
         <motion.p className="font-papaya text-3xl text-pretty text-white/90  md:text-6xl text-center py-4">
           Eat Pure,Eat Desi<br /> Eat Misthan
         </motion.p>
-        <button onClick={()=>{router.push('/register')}} className="px-4 py-2 backdrop-blur-sm border bg-emerald-300/10 border-emerald-500/20 text-white mx-auto text-center rounded-full relative mt-4">
+        <button onClick={()=>{router.push('/check')}} className="px-4 py-2 backdrop-blur-sm border bg-emerald-300/10 border-emerald-500/20 text-white mx-auto text-center rounded-full relative mt-4">
           <span>Order now →</span>
           <div className="absolute inset-x-0  h-px -bottom-px bg-gradient-to-r w-3/4 mx-auto from-transparent via-emerald-500 to-transparent" />
         </button>
@@ -131,7 +131,7 @@ export default function HomePage() {
     </Link>
    
   </div>
-  <Link href={{pathname:'/register'}}>
+  <Link href={{pathname:'/check'}}>
   <div className="md:h-[6vh] w-[50vw] bg-white/80 hover:bg-slate-200/90 hover:cursor-pointer shadow-xl border-2 border-solid border-gray-500/70 text-center rounded-full md:w-[10vw] mx-auto">
     <h1 className="pt-[1vh] rounded-full font-semibold" >Explore More...</h1>
     </div>

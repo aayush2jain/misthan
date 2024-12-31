@@ -1,5 +1,5 @@
 import styles from './styles.module.scss';
-import Picture1 from '../../../public/images/image1.jpg';
+import Picture1 from '../../../public/images/image9.webp';
 import Picture2 from '../../../public/images/image4.jpg';
 import Picture3 from '../../../public/images/imagev.jpg';
 import Picture4 from '../../../public/images/image6.jpg'

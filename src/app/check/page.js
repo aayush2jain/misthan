@@ -29,8 +29,8 @@ const page = () => {
       console.log('response',response.data);
       setuserId(response.data._id);
 		} catch (err) {
-			alert("please login yourself ");
-      router.push('/login');
+			alert("please first register yourself ");
+      router.push('/register');
 		}
 	};
 
